@@ -1,0 +1,3 @@
+/home/noxy/cpp/silo_handmade/build/CMakeFiles/edit_cache.dir
+/home/noxy/cpp/silo_handmade/build/CMakeFiles/rebuild_cache.dir
+/home/noxy/cpp/silo_handmade/build/CMakeFiles/silo.exe.dir
