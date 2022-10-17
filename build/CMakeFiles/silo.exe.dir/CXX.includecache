@@ -6,9 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/noxy/cpp/silo_handmade/common.h
+/home/noxy/cpp/silo_logging/common.h
 
-/home/noxy/cpp/silo_handmade/logger.h
+/home/noxy/cpp/silo_logging/logger.cpp
+logger.h
+/home/noxy/cpp/silo_logging/logger.h
+
+/home/noxy/cpp/silo_logging/logger.h
 vector
 -
 mutex
@@ -28,11 +32,29 @@ stdio.h
 iostream
 -
 notifier.h
-/home/noxy/cpp/silo_handmade/notifier.h
+/home/noxy/cpp/silo_logging/notifier.h
 common.h
-/home/noxy/cpp/silo_handmade/common.h
+/home/noxy/cpp/silo_logging/common.h
 
-/home/noxy/cpp/silo_handmade/notifier.h
+/home/noxy/cpp/silo_logging/main.cpp
+iostream
+-
+vector
+-
+thread
+-
+common.h
+/home/noxy/cpp/silo_logging/common.h
+result.h
+/home/noxy/cpp/silo_logging/result.h
+record.h
+/home/noxy/cpp/silo_logging/record.h
+worker.h
+/home/noxy/cpp/silo_logging/worker.h
+logger.h
+/home/noxy/cpp/silo_logging/logger.h
+
+/home/noxy/cpp/silo_logging/notifier.h
 vector
 -
 thread
@@ -44,7 +66,27 @@ condition_variable
 unordered_set
 -
 
-/home/noxy/cpp/silo_handmade/worker.cpp
+/home/noxy/cpp/silo_logging/record.h
+cstdint
+-
+common.h
+/home/noxy/cpp/silo_logging/common.h
+
+/home/noxy/cpp/silo_logging/result.h
+stdint.h
+-
+stdio.h
+-
+
+/home/noxy/cpp/silo_logging/util.cpp
+
+/home/noxy/cpp/silo_logging/worker.cpp
 logger.h
-/home/noxy/cpp/silo_handmade/logger.h
+/home/noxy/cpp/silo_logging/logger.h
+
+/home/noxy/cpp/silo_logging/worker.h
+vector
+-
+logger.h
+/home/noxy/cpp/silo_logging/logger.h
 
