@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+
 set(ENV{CXX} g++)
 project(ccbench_base_silo)
 

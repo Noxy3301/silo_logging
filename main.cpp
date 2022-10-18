@@ -53,15 +53,15 @@ void waitForReady(const std::vector<char> &readys) {
 
 int main() {
     LoggerAffinity affin;   // Nodeごとに管理する用のやつ, numa仕様じゃないので特に気にしなくていい
-    affin.init(THREAD_NUM, LOGGER_NUM);
+    affin.init(WORKER_NUM, LOGGER_NUM);
 
     makeDB();   // DBの作成
 
     bool start = false;
     bool quit = false;
 
-    SiloResult.resize(THREAD_NUM);  // threadの個数だけresultを格納するvectorを生成しておく
-    std::vector<char> readys(THREAD_NUM);
+    SiloResult.resize(WORKER_NUM);  // threadの個数だけresultを格納するvectorを生成しておく
+    std::vector<char> readys(WORKER_NUM);
 
     // TODO: workerとloggerの作成
     std::atomic<Logger *> logs[LOGGER_NUM];
@@ -69,15 +69,16 @@ int main() {
     std::vector<std::thread> lthv;  // logger threads
     std::vector<std::thread> wthv;  // worker threads
 
-    // set_affinityを一旦しない方針でやるので、とりあえずthreadを立てよう
+    // affinの構造を理解したので実装をccbenchに寄せる
+    // manualでaffinityを設定する予定はないのでset_cpuはナシで
     int i = 0, j = 0;
-    for ( ; i < LOGGER_NUM; i++) {
-        logs[i].store(0);
-        lthv.emplace_back(logger_th, i, std::ref(notifier), &(logs[i]));
-    }
-    // worker_thの最後の引数は恐らくLog担当者にLogを渡すためのアドレス？
-    for ( ; j < THREAD_NUM; j++) {
-        wthv.emplace_back(worker_th, j, std::ref(readys[j]), std::ref(start), std::ref(quit), &(logs[i]));
+    for (auto itr = affin.nodes_.begin(); itr != affin.nodes_.end(); itr++, j++) {
+        int lcpu = itr->logger_cpu_;
+        logs[j].store(0);
+        lthv.emplace_back(logger_th, j, std::ref(notifier), &(logs[j]));
+        for (auto wcpu = itr->worker_cpu_.begin(); wcpu != itr->worker_cpu_.end(); wcpu++, i++) {
+            wthv.emplace_back(worker_th, i, std::ref(readys[i]), std::ref(start), std::ref(quit), &(logs[j]));  // logsはj番目(loggerと共通のやつ)
+        }
     }
 
     waitForReady(readys);

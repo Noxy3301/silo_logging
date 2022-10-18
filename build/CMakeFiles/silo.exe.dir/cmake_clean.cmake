@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/silo.exe.dir/logger.o"
-  "CMakeFiles/silo.exe.dir/main.o"
-  "CMakeFiles/silo.exe.dir/util.o"
-  "CMakeFiles/silo.exe.dir/worker.o"
+  "CMakeFiles/silo.exe.dir/logger.cpp.o"
+  "CMakeFiles/silo.exe.dir/main.cpp.o"
+  "CMakeFiles/silo.exe.dir/util.cpp.o"
+  "CMakeFiles/silo.exe.dir/worker.cpp.o"
   "silo.exe"
   "silo.exe.pdb"
 )

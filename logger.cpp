@@ -1,10 +1,11 @@
 #include "logger.h"
 
 void logger_th(int thID, Notifier &notifier, std::atomic<Logger*> *logp) {
-
+    std::cout << "Hi(logger_th), my thID is " << thID << std::endl;
 }
 
-// Q:loggerとworkerの割り振りがどういうアルゴリズムになっているのかがわからん
+// Nodeにloggerとworkerを担うCPU(コア)を振り分ける
+// Nodeに均等にCPUを割り振って、thread_num > num_cpusなら最後のworkerがloggerを兼任、そうじゃないならworkerの最後のやつをloggerに転職
 void LoggerAffinity::init(unsigned worker_num, unsigned logger_num) {
     unsigned num_cpus = std::thread::hardware_concurrency();
     if (logger_num > num_cpus || worker_num > num_cpus) {

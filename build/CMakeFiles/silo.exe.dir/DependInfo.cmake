@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/noxy/cpp/silo_logging/logger.cpp" "/home/noxy/cpp/silo_logging/build/CMakeFiles/silo.exe.dir/logger.o"
-  "/home/noxy/cpp/silo_logging/main.cpp" "/home/noxy/cpp/silo_logging/build/CMakeFiles/silo.exe.dir/main.o"
-  "/home/noxy/cpp/silo_logging/util.cpp" "/home/noxy/cpp/silo_logging/build/CMakeFiles/silo.exe.dir/util.o"
-  "/home/noxy/cpp/silo_logging/worker.cpp" "/home/noxy/cpp/silo_logging/build/CMakeFiles/silo.exe.dir/worker.o"
+  "/home/noxy/cpp/silo_logging/logger.cpp" "/home/noxy/cpp/silo_logging/build/CMakeFiles/silo.exe.dir/logger.cpp.o"
+  "/home/noxy/cpp/silo_logging/main.cpp" "/home/noxy/cpp/silo_logging/build/CMakeFiles/silo.exe.dir/main.cpp.o"
+  "/home/noxy/cpp/silo_logging/util.cpp" "/home/noxy/cpp/silo_logging/build/CMakeFiles/silo.exe.dir/util.cpp.o"
+  "/home/noxy/cpp/silo_logging/worker.cpp" "/home/noxy/cpp/silo_logging/build/CMakeFiles/silo.exe.dir/worker.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

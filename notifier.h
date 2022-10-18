@@ -8,7 +8,8 @@
 
 class Logger;
 
-// Q:これなに？
+// TSC: time stamp counter
+// リセットされてからのCPUサイクル数をカウントするやつ
 static uint64_t rdtscp() {
     uint64_t rax;
     uint64_t rdx;

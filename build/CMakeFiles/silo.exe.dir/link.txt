@@ -1,1 +1,1 @@
-/usr/bin/g++    -rdynamic CMakeFiles/silo.exe.dir/main.o CMakeFiles/silo.exe.dir/worker.o CMakeFiles/silo.exe.dir/logger.o CMakeFiles/silo.exe.dir/util.o  -o silo.exe  -pthread 
+/usr/bin/g++     CMakeFiles/silo.exe.dir/main.cpp.o CMakeFiles/silo.exe.dir/worker.cpp.o CMakeFiles/silo.exe.dir/logger.cpp.o CMakeFiles/silo.exe.dir/util.cpp.o  -o silo.exe  -pthread 

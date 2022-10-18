@@ -57,72 +57,72 @@ include CMakeFiles/silo.exe.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/silo.exe.dir/flags.make
 
-CMakeFiles/silo.exe.dir/main.o: CMakeFiles/silo.exe.dir/flags.make
-CMakeFiles/silo.exe.dir/main.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/noxy/cpp/silo_logging/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/silo.exe.dir/main.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/silo.exe.dir/main.o -c /home/noxy/cpp/silo_logging/main.cpp
+CMakeFiles/silo.exe.dir/main.cpp.o: CMakeFiles/silo.exe.dir/flags.make
+CMakeFiles/silo.exe.dir/main.cpp.o: ../main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/noxy/cpp/silo_logging/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/silo.exe.dir/main.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/silo.exe.dir/main.cpp.o -c /home/noxy/cpp/silo_logging/main.cpp
 
-CMakeFiles/silo.exe.dir/main.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/silo.exe.dir/main.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/noxy/cpp/silo_logging/main.cpp > CMakeFiles/silo.exe.dir/main.i
+CMakeFiles/silo.exe.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/silo.exe.dir/main.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/noxy/cpp/silo_logging/main.cpp > CMakeFiles/silo.exe.dir/main.cpp.i
 
-CMakeFiles/silo.exe.dir/main.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/silo.exe.dir/main.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/noxy/cpp/silo_logging/main.cpp -o CMakeFiles/silo.exe.dir/main.s
+CMakeFiles/silo.exe.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/silo.exe.dir/main.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/noxy/cpp/silo_logging/main.cpp -o CMakeFiles/silo.exe.dir/main.cpp.s
 
-CMakeFiles/silo.exe.dir/worker.o: CMakeFiles/silo.exe.dir/flags.make
-CMakeFiles/silo.exe.dir/worker.o: ../worker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/noxy/cpp/silo_logging/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/silo.exe.dir/worker.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/silo.exe.dir/worker.o -c /home/noxy/cpp/silo_logging/worker.cpp
+CMakeFiles/silo.exe.dir/worker.cpp.o: CMakeFiles/silo.exe.dir/flags.make
+CMakeFiles/silo.exe.dir/worker.cpp.o: ../worker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/noxy/cpp/silo_logging/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/silo.exe.dir/worker.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/silo.exe.dir/worker.cpp.o -c /home/noxy/cpp/silo_logging/worker.cpp
 
-CMakeFiles/silo.exe.dir/worker.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/silo.exe.dir/worker.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/noxy/cpp/silo_logging/worker.cpp > CMakeFiles/silo.exe.dir/worker.i
+CMakeFiles/silo.exe.dir/worker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/silo.exe.dir/worker.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/noxy/cpp/silo_logging/worker.cpp > CMakeFiles/silo.exe.dir/worker.cpp.i
 
-CMakeFiles/silo.exe.dir/worker.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/silo.exe.dir/worker.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/noxy/cpp/silo_logging/worker.cpp -o CMakeFiles/silo.exe.dir/worker.s
+CMakeFiles/silo.exe.dir/worker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/silo.exe.dir/worker.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/noxy/cpp/silo_logging/worker.cpp -o CMakeFiles/silo.exe.dir/worker.cpp.s
 
-CMakeFiles/silo.exe.dir/logger.o: CMakeFiles/silo.exe.dir/flags.make
-CMakeFiles/silo.exe.dir/logger.o: ../logger.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/noxy/cpp/silo_logging/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/silo.exe.dir/logger.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/silo.exe.dir/logger.o -c /home/noxy/cpp/silo_logging/logger.cpp
+CMakeFiles/silo.exe.dir/logger.cpp.o: CMakeFiles/silo.exe.dir/flags.make
+CMakeFiles/silo.exe.dir/logger.cpp.o: ../logger.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/noxy/cpp/silo_logging/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/silo.exe.dir/logger.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/silo.exe.dir/logger.cpp.o -c /home/noxy/cpp/silo_logging/logger.cpp
 
-CMakeFiles/silo.exe.dir/logger.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/silo.exe.dir/logger.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/noxy/cpp/silo_logging/logger.cpp > CMakeFiles/silo.exe.dir/logger.i
+CMakeFiles/silo.exe.dir/logger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/silo.exe.dir/logger.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/noxy/cpp/silo_logging/logger.cpp > CMakeFiles/silo.exe.dir/logger.cpp.i
 
-CMakeFiles/silo.exe.dir/logger.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/silo.exe.dir/logger.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/noxy/cpp/silo_logging/logger.cpp -o CMakeFiles/silo.exe.dir/logger.s
+CMakeFiles/silo.exe.dir/logger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/silo.exe.dir/logger.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/noxy/cpp/silo_logging/logger.cpp -o CMakeFiles/silo.exe.dir/logger.cpp.s
 
-CMakeFiles/silo.exe.dir/util.o: CMakeFiles/silo.exe.dir/flags.make
-CMakeFiles/silo.exe.dir/util.o: ../util.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/noxy/cpp/silo_logging/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/silo.exe.dir/util.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/silo.exe.dir/util.o -c /home/noxy/cpp/silo_logging/util.cpp
+CMakeFiles/silo.exe.dir/util.cpp.o: CMakeFiles/silo.exe.dir/flags.make
+CMakeFiles/silo.exe.dir/util.cpp.o: ../util.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/noxy/cpp/silo_logging/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/silo.exe.dir/util.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/silo.exe.dir/util.cpp.o -c /home/noxy/cpp/silo_logging/util.cpp
 
-CMakeFiles/silo.exe.dir/util.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/silo.exe.dir/util.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/noxy/cpp/silo_logging/util.cpp > CMakeFiles/silo.exe.dir/util.i
+CMakeFiles/silo.exe.dir/util.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/silo.exe.dir/util.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/noxy/cpp/silo_logging/util.cpp > CMakeFiles/silo.exe.dir/util.cpp.i
 
-CMakeFiles/silo.exe.dir/util.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/silo.exe.dir/util.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/noxy/cpp/silo_logging/util.cpp -o CMakeFiles/silo.exe.dir/util.s
+CMakeFiles/silo.exe.dir/util.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/silo.exe.dir/util.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/noxy/cpp/silo_logging/util.cpp -o CMakeFiles/silo.exe.dir/util.cpp.s
 
 # Object files for target silo.exe
 silo_exe_OBJECTS = \
-"CMakeFiles/silo.exe.dir/main.o" \
-"CMakeFiles/silo.exe.dir/worker.o" \
-"CMakeFiles/silo.exe.dir/logger.o" \
-"CMakeFiles/silo.exe.dir/util.o"
+"CMakeFiles/silo.exe.dir/main.cpp.o" \
+"CMakeFiles/silo.exe.dir/worker.cpp.o" \
+"CMakeFiles/silo.exe.dir/logger.cpp.o" \
+"CMakeFiles/silo.exe.dir/util.cpp.o"
 
 # External object files for target silo.exe
 silo_exe_EXTERNAL_OBJECTS =
 
-silo.exe: CMakeFiles/silo.exe.dir/main.o
-silo.exe: CMakeFiles/silo.exe.dir/worker.o
-silo.exe: CMakeFiles/silo.exe.dir/logger.o
-silo.exe: CMakeFiles/silo.exe.dir/util.o
+silo.exe: CMakeFiles/silo.exe.dir/main.cpp.o
+silo.exe: CMakeFiles/silo.exe.dir/worker.cpp.o
+silo.exe: CMakeFiles/silo.exe.dir/logger.cpp.o
+silo.exe: CMakeFiles/silo.exe.dir/util.cpp.o
 silo.exe: CMakeFiles/silo.exe.dir/build.make
 silo.exe: CMakeFiles/silo.exe.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/noxy/cpp/silo_logging/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable silo.exe"

@@ -123,65 +123,113 @@ silo.exe/fast:
 	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/build
 .PHONY : silo.exe/fast
 
-# target to build an object file
-logger.o:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/logger.o
+logger.o: logger.cpp.o
+
 .PHONY : logger.o
 
-# target to preprocess a source file
-logger.i:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/logger.i
+# target to build an object file
+logger.cpp.o:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/logger.cpp.o
+.PHONY : logger.cpp.o
+
+logger.i: logger.cpp.i
+
 .PHONY : logger.i
 
-# target to generate assembly for a file
-logger.s:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/logger.s
+# target to preprocess a source file
+logger.cpp.i:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/logger.cpp.i
+.PHONY : logger.cpp.i
+
+logger.s: logger.cpp.s
+
 .PHONY : logger.s
 
-# target to build an object file
-main.o:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/main.o
+# target to generate assembly for a file
+logger.cpp.s:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/logger.cpp.s
+.PHONY : logger.cpp.s
+
+main.o: main.cpp.o
+
 .PHONY : main.o
 
-# target to preprocess a source file
-main.i:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/main.i
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+
 .PHONY : main.i
 
-# target to generate assembly for a file
-main.s:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/main.s
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+
 .PHONY : main.s
 
-# target to build an object file
-util.o:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/util.o
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/main.cpp.s
+.PHONY : main.cpp.s
+
+util.o: util.cpp.o
+
 .PHONY : util.o
 
-# target to preprocess a source file
-util.i:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/util.i
+# target to build an object file
+util.cpp.o:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/util.cpp.o
+.PHONY : util.cpp.o
+
+util.i: util.cpp.i
+
 .PHONY : util.i
 
-# target to generate assembly for a file
-util.s:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/util.s
+# target to preprocess a source file
+util.cpp.i:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/util.cpp.i
+.PHONY : util.cpp.i
+
+util.s: util.cpp.s
+
 .PHONY : util.s
 
-# target to build an object file
-worker.o:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/worker.o
+# target to generate assembly for a file
+util.cpp.s:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/util.cpp.s
+.PHONY : util.cpp.s
+
+worker.o: worker.cpp.o
+
 .PHONY : worker.o
 
-# target to preprocess a source file
-worker.i:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/worker.i
+# target to build an object file
+worker.cpp.o:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/worker.cpp.o
+.PHONY : worker.cpp.o
+
+worker.i: worker.cpp.i
+
 .PHONY : worker.i
 
-# target to generate assembly for a file
-worker.s:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/worker.s
+# target to preprocess a source file
+worker.cpp.i:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/worker.cpp.i
+.PHONY : worker.cpp.i
+
+worker.s: worker.cpp.s
+
 .PHONY : worker.s
+
+# target to generate assembly for a file
+worker.cpp.s:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/worker.cpp.s
+.PHONY : worker.cpp.s
 
 # Help Target
 help:

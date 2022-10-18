@@ -79,6 +79,7 @@ class LoggerNode {
         LoggerNode() {}
 };
 
+// node_の中に、worker:loggerがn:1で入っている(即ちnode_の要素数はloggerの数)
 class LoggerAffinity {
     public:
         std::vector<LoggerNode> nodes_;

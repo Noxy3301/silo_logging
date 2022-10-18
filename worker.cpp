@@ -7,7 +7,7 @@ void worker_th(int thID, char &ready, const bool &start, const bool &quit, std::
     // Xoroshiro128Plus rnd;
     // rnd.init();
 
-    std::cout << "Hi, my thID is " << thID << std::endl;
+    std::cout << "Hi(worker_th), my thID is " << thID << std::endl;
 
     __atomic_store_n(&ready, 1, __ATOMIC_RELEASE);
     while (true) {
