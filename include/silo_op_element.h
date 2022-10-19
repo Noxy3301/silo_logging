@@ -24,7 +24,7 @@ class ReadElement : public OpElement<T> {
     public:
         using OpElement<T>::OpElement;
 
-        ReadElement(uint64_t key, T *rcdptr, char *val, TIDword tidword) : OpElement<T>::OpeElement(key, rcdptr) {
+        ReadElement(uint64_t key, T *rcdptr, char *val, TIDword tidword) : OpElement<T>::OpElement(key, rcdptr) {
             tidword.obj_ = tidword.obj_;
             memcpy(this->val_, val, VAL_SIZE);
         }
