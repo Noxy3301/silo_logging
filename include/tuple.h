@@ -1,7 +1,9 @@
 #pragma once
 
 #include <cstdint>
-#include "common.h"
+
+#include "cache_line_size.h"
+#include "consts.h"
 
 // structにしているのはprivateにしたいからってこと？
 struct TIDword {
@@ -25,5 +27,5 @@ struct TIDword {
 class Tuple {
     public:
         alignas(CACHE_LINE_SIZE) TIDword tidword_;
-        char val_[4];   //引数で宣言しているけどよくわからんから一旦定数で
+        char val_[VAL_SIZE];   //引数で宣言しているけどよくわからんから一旦定数で
 };

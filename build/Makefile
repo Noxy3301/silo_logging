@@ -123,6 +123,33 @@ silo.exe/fast:
 	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/build
 .PHONY : silo.exe/fast
 
+log_buffer.o: log_buffer.cpp.o
+
+.PHONY : log_buffer.o
+
+# target to build an object file
+log_buffer.cpp.o:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/log_buffer.cpp.o
+.PHONY : log_buffer.cpp.o
+
+log_buffer.i: log_buffer.cpp.i
+
+.PHONY : log_buffer.i
+
+# target to preprocess a source file
+log_buffer.cpp.i:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/log_buffer.cpp.i
+.PHONY : log_buffer.cpp.i
+
+log_buffer.s: log_buffer.cpp.s
+
+.PHONY : log_buffer.s
+
+# target to generate assembly for a file
+log_buffer.cpp.s:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/log_buffer.cpp.s
+.PHONY : log_buffer.cpp.s
+
 logger.o: logger.cpp.o
 
 .PHONY : logger.o
@@ -177,6 +204,87 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+notifier.o: notifier.cpp.o
+
+.PHONY : notifier.o
+
+# target to build an object file
+notifier.cpp.o:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/notifier.cpp.o
+.PHONY : notifier.cpp.o
+
+notifier.i: notifier.cpp.i
+
+.PHONY : notifier.i
+
+# target to preprocess a source file
+notifier.cpp.i:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/notifier.cpp.i
+.PHONY : notifier.cpp.i
+
+notifier.s: notifier.cpp.s
+
+.PHONY : notifier.s
+
+# target to generate assembly for a file
+notifier.cpp.s:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/notifier.cpp.s
+.PHONY : notifier.cpp.s
+
+silo_result.o: silo_result.cpp.o
+
+.PHONY : silo_result.o
+
+# target to build an object file
+silo_result.cpp.o:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/silo_result.cpp.o
+.PHONY : silo_result.cpp.o
+
+silo_result.i: silo_result.cpp.i
+
+.PHONY : silo_result.i
+
+# target to preprocess a source file
+silo_result.cpp.i:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/silo_result.cpp.i
+.PHONY : silo_result.cpp.i
+
+silo_result.s: silo_result.cpp.s
+
+.PHONY : silo_result.s
+
+# target to generate assembly for a file
+silo_result.cpp.s:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/silo_result.cpp.s
+.PHONY : silo_result.cpp.s
+
+transaction.o: transaction.cpp.o
+
+.PHONY : transaction.o
+
+# target to build an object file
+transaction.cpp.o:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/transaction.cpp.o
+.PHONY : transaction.cpp.o
+
+transaction.i: transaction.cpp.i
+
+.PHONY : transaction.i
+
+# target to preprocess a source file
+transaction.cpp.i:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/transaction.cpp.i
+.PHONY : transaction.cpp.i
+
+transaction.s: transaction.cpp.s
+
+.PHONY : transaction.s
+
+# target to generate assembly for a file
+transaction.cpp.s:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/transaction.cpp.s
+.PHONY : transaction.cpp.s
+
 util.o: util.cpp.o
 
 .PHONY : util.o
@@ -204,33 +312,6 @@ util.cpp.s:
 	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/util.cpp.s
 .PHONY : util.cpp.s
 
-worker.o: worker.cpp.o
-
-.PHONY : worker.o
-
-# target to build an object file
-worker.cpp.o:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/worker.cpp.o
-.PHONY : worker.cpp.o
-
-worker.i: worker.cpp.i
-
-.PHONY : worker.i
-
-# target to preprocess a source file
-worker.cpp.i:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/worker.cpp.i
-.PHONY : worker.cpp.i
-
-worker.s: worker.cpp.s
-
-.PHONY : worker.s
-
-# target to generate assembly for a file
-worker.cpp.s:
-	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/worker.cpp.s
-.PHONY : worker.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -240,18 +321,27 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... silo.exe"
+	@echo "... log_buffer.o"
+	@echo "... log_buffer.i"
+	@echo "... log_buffer.s"
 	@echo "... logger.o"
 	@echo "... logger.i"
 	@echo "... logger.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... notifier.o"
+	@echo "... notifier.i"
+	@echo "... notifier.s"
+	@echo "... silo_result.o"
+	@echo "... silo_result.i"
+	@echo "... silo_result.s"
+	@echo "... transaction.o"
+	@echo "... transaction.i"
+	@echo "... transaction.s"
 	@echo "... util.o"
 	@echo "... util.i"
 	@echo "... util.s"
-	@echo "... worker.o"
-	@echo "... worker.i"
-	@echo "... worker.s"
 .PHONY : help
 
 

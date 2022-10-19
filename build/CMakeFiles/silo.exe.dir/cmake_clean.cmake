@@ -1,8 +1,11 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/silo.exe.dir/log_buffer.cpp.o"
   "CMakeFiles/silo.exe.dir/logger.cpp.o"
   "CMakeFiles/silo.exe.dir/main.cpp.o"
+  "CMakeFiles/silo.exe.dir/notifier.cpp.o"
+  "CMakeFiles/silo.exe.dir/silo_result.cpp.o"
+  "CMakeFiles/silo.exe.dir/transaction.cpp.o"
   "CMakeFiles/silo.exe.dir/util.cpp.o"
-  "CMakeFiles/silo.exe.dir/worker.cpp.o"
   "silo.exe"
   "silo.exe.pdb"
 )

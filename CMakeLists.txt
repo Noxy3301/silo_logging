@@ -10,7 +10,11 @@ find_package(Threads REQUIRED)
 # file(GLOB_RECURSE PROJECT_SOURCES *.cpp)
 # file(GLOB_RECURSE PROJECT_HEADERS *.h)
 
-add_executable(silo.exe main.cpp worker.cpp logger.cpp util.cpp)
+file(GLOB SILO_SOURCES
+    "main.cpp" "silo_result.cpp" "transaction.cpp" "util.cpp" "log_buffer.cpp" "logger.cpp" "notifier.cpp"   
+)
+
+add_executable(silo.exe ${SILO_SOURCES})
 
 # add_executable(silo.exe ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 

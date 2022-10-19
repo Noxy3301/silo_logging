@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#include "cache_line_size.h"
+
 class Result {
     public:
         uint64_t local_abort_counts_ = 0; //alignas(CACHE_LINE_SIZE) するかも
@@ -51,3 +53,6 @@ class ResultLog {
         void addLocalPublishLatency(const uint64_t count);
         void addLocalPublishCounts(const uint64_t count);
 };
+
+extern std::vector<ResultLog> SiloResult;
+extern void initResult();
