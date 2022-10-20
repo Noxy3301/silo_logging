@@ -57,6 +57,8 @@ class Notifier {
             delete latency_log_;
         }
 
+        void logger_end(Logger *logger);
+        void display();
         // TODO:その他の関数は未実装
 
 };

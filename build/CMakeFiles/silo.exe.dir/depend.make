@@ -39,6 +39,7 @@ CMakeFiles/silo.exe.dir/logger.cpp.o: ../include/tuple.h
 CMakeFiles/silo.exe.dir/logger.cpp.o: ../logger.cpp
 
 CMakeFiles/silo.exe.dir/main.cpp.o: ../include/atomic_tool.h
+CMakeFiles/silo.exe.dir/main.cpp.o: ../include/atomic_wrapper.h
 CMakeFiles/silo.exe.dir/main.cpp.o: ../include/cache_line_size.h
 CMakeFiles/silo.exe.dir/main.cpp.o: ../include/common.h
 CMakeFiles/silo.exe.dir/main.cpp.o: ../include/consts.h
@@ -64,7 +65,22 @@ CMakeFiles/silo.exe.dir/main.cpp.o: ../include/util_silo.h
 CMakeFiles/silo.exe.dir/main.cpp.o: ../include/zipf.h
 CMakeFiles/silo.exe.dir/main.cpp.o: ../main.cpp
 
+CMakeFiles/silo.exe.dir/notifier.cpp.o: ../include/cache_line_size.h
+CMakeFiles/silo.exe.dir/notifier.cpp.o: ../include/common.h
+CMakeFiles/silo.exe.dir/notifier.cpp.o: ../include/consts.h
+CMakeFiles/silo.exe.dir/notifier.cpp.o: ../include/int64byte.h
+CMakeFiles/silo.exe.dir/notifier.cpp.o: ../include/notifier.h
+CMakeFiles/silo.exe.dir/notifier.cpp.o: ../include/tsc.h
+CMakeFiles/silo.exe.dir/notifier.cpp.o: ../include/tuple.h
 CMakeFiles/silo.exe.dir/notifier.cpp.o: ../notifier.cpp
+
+CMakeFiles/silo.exe.dir/result.cpp.o: ../include/cache_line_size.h
+CMakeFiles/silo.exe.dir/result.cpp.o: ../include/result.h
+CMakeFiles/silo.exe.dir/result.cpp.o: ../result.cpp
+
+CMakeFiles/silo.exe.dir/result_log.cpp.o: ../include/cache_line_size.h
+CMakeFiles/silo.exe.dir/result_log.cpp.o: ../include/result.h
+CMakeFiles/silo.exe.dir/result_log.cpp.o: ../result_log.cpp
 
 CMakeFiles/silo.exe.dir/silo_result.cpp.o: ../include/cache_line_size.h
 CMakeFiles/silo.exe.dir/silo_result.cpp.o: ../include/common.h
@@ -75,6 +91,7 @@ CMakeFiles/silo.exe.dir/silo_result.cpp.o: ../include/tuple.h
 CMakeFiles/silo.exe.dir/silo_result.cpp.o: ../silo_result.cpp
 
 CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/atomic_tool.h
+CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/atomic_wrapper.h
 CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/cache_line_size.h
 CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/common.h
 CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/consts.h
@@ -88,6 +105,7 @@ CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/notifier.h
 CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/procedure.h
 CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/result.h
 CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/silo_op_element.h
+CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/string.h
 CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/transaction.h
 CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/transaction_log.h
 CMakeFiles/silo.exe.dir/transaction.cpp.o: ../include/tsc.h

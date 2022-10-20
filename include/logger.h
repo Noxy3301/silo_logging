@@ -70,6 +70,10 @@ class Logger {
         Logger(int i, Notifier &n) : thid_(i), notifier_stats_(n) {}
 
         void add_tx_executor(TxExecutorLog &trans);
+        void worker();
+        // void send_nid_to_notifier(); この3つ実装しないかも
+        // std::uint64_t find_min_epoch();
+        // void wait_deq();
         void worker_end(int thid);
-        // TODO:その他の関数は未実装
+        void logger_end();
 };

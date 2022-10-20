@@ -19,3 +19,7 @@ INLINE uint64_t atomicLoadGE() {
     uint64_t_64byte result = __atomic_load_n(&(GlobalEpoch.obj_), __ATOMIC_ACQUIRE);
     return result.obj_;
 }
+
+INLINE void atomicStoreThLocalEpoch(unsigned int thid, uint64_t newval) {
+    __atomic_store_n(&(ThLocalEpoch[thid].obj_), newval, __ATOMIC_RELEASE);
+}

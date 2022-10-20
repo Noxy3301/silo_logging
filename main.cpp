@@ -5,6 +5,7 @@
 #define GLOBAL_VALUE_DEFINE
 
 #include "include/atomic_tool.h"
+#include "include/atomic_wrapper.h"
 #include "include/common.h"
 #include "include/util_silo.h"
 #include "include/result.h"
@@ -18,6 +19,11 @@
 #include "include/tsc.h"
 #include "include/util.h"
 #include "include/zipf.h"
+
+
+std::mutex m;
+
+
 
 void worker_th(int thid, char &ready, const bool &start, const bool &quit, std::atomic<Logger*> *logp) {
     ResultLog &myres_log = std::ref(SiloResult[thid]);
@@ -35,8 +41,6 @@ void worker_th(int thid, char &ready, const bool &start, const bool &quit, std::
         std::this_thread::sleep_for(std::chrono::nanoseconds(100));
     }
     logger->add_tx_executor(trans);
-    
-    std::cout << "Hi(worker_th), my thid is " << thid << std::endl;
 
     __atomic_store_n(&ready, 1, __ATOMIC_RELEASE);
     while (true) {
@@ -55,8 +59,9 @@ void worker_th(int thid, char &ready, const bool &start, const bool &quit, std::
         makeProcedure(trans.pro_set_, rnd, zipf, TUPLE_NUM, MAX_OPE, THREAD_NUM, RRAITO, RMW, YCSB, false, thid, myres);
         
     RETRY:
+        // m.lock(); std::cout << "running_" << thid << std::endl; m.unlock();
         if (thid == 0) leaderWork(epoch_timer_start, epoch_timer_stop);
-        trans.durableEpochWork(epoch_timer_start, epoch_timer_stop, quit);
+        // trans.durableEpochWork(epoch_timer_start, epoch_timer_stop, quit);
         // DURABLE EPOCHの話はやらなくてもよさげ？
         if (__atomic_load_n(&quit, __ATOMIC_ACQUIRE)) break;
         
@@ -73,24 +78,32 @@ void worker_th(int thid, char &ready, const bool &start, const bool &quit, std::
                 ERR;
             }
         }
-
         if (trans.validationPhase()) {
             trans.writePhase();
-            // local_commit_countsはbackoff?で使うらしいから実装しなくてもいいかも
+            // m.lock(); std::cout << "commit!!!!!!!!!!!" << thid << std::endl; m.unlock();
+            storeRelease(myres.local_commit_counts_, loadAcquire(myres.local_commit_counts_) + 1);
         } else {
             trans.abort();
-            // myres.local_abort_counts_++;
+            myres.local_abort_counts_++;
             goto RETRY;
         }
     }
+
     trans.log_buffer_pool_.terminate(myres_log);
     logger->worker_end(thid);
+
+    return;
 }
 
 
 
 void logger_th(int thid, Notifier &notifier, std::atomic<Logger*> *logp) {
-    std::cout << "Hi(logger_th), my thid is " << thid << std::endl;
+
+    alignas(CACHE_LINE_SIZE) Logger logger(thid, notifier);
+    // TODO:未実装 notifier.add_logger(&logger);
+    logp->store(&logger);
+    logger.worker();    // TODO:未実装
+    return;
 }
 
 
@@ -133,8 +146,25 @@ void waitForReady(const std::vector<char> &readys) {
 }
 
 int main() {
-    LoggerAffinity affin;   // Nodeごとに管理する用のやつ, numa仕様じゃないので特に気にしなくていい
+    LoggerAffinity affin;   // Nodeごとに管理する用のやつ
     affin.init(THREAD_NUM, LOGGER_NUM);
+
+    if (posix_memalign((void **) &ThLocalEpoch, CACHE_LINE_SIZE, THREAD_NUM * sizeof(uint64_t_64byte)) != 0) ERR;
+    if (posix_memalign((void **) &CTIDW, CACHE_LINE_SIZE, THREAD_NUM * sizeof(uint64_t_64byte)) != 0) ERR;
+
+    for (unsigned int i = 0; i < THREAD_NUM; i++) {
+        ThLocalEpoch[i].obj_ = 0;
+        // CTIDW[i].obj_ = 0;
+        CTIDW[i].obj_ = ~(uint64_t)0;   // util->util_logでCTIDWに対して2回初期化を行っているから後者を採用しておく
+    }
+
+    if (posix_memalign((void **)&ThLocalDurableEpoch, CACHE_LINE_SIZE, LOGGER_NUM * sizeof(uint64_t_64byte)) != 0) ERR;
+
+
+    for (unsigned int i = 0; i < LOGGER_NUM; i++) {
+        ThLocalDurableEpoch[i].obj_ = 0;
+    }
+    DurableEpoch.obj_ = 0;
 
     makeDB();   // DBの作成
 
@@ -167,8 +197,19 @@ int main() {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000 * EXTIME));
     __atomic_store_n(&quit, true, __ATOMIC_RELEASE);
 
+    // m.lock(); std::cout << "owari!" << std::endl; m.unlock();
+
     for (auto &th : lthv) th.join();
+    // m.lock(); std::cout << "kokoka??" << std::endl; m.unlock();
     for (auto &th : wthv) th.join();
+
+    m.lock(); std::cout << "owari!!" << std::endl; m.unlock();
+
+    for (unsigned int i = 0; i < THREAD_NUM; i++) {
+        SiloResult[0].addLocalAllResult(SiloResult[i]);
+    }
+    SiloResult[0].displayAllResult(CLOCKS_PER_US, EXTIME, THREAD_NUM);
+    // notifier.display();
 
     return 0;
 }

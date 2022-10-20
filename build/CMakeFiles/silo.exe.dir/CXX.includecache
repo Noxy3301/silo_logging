@@ -10,6 +10,8 @@
 common.h
 /home/noxy/cpp/silo_logging/include/common.h
 
+/home/noxy/cpp/silo_logging/include/atomic_wrapper.h
+
 /home/noxy/cpp/silo_logging/include/cache_line_size.h
 cstddef
 -
@@ -147,6 +149,8 @@ stdint.h
 -
 stdio.h
 -
+vector
+-
 cache_line_size.h
 /home/noxy/cpp/silo_logging/include/cache_line_size.h
 
@@ -155,6 +159,12 @@ memory
 -
 debug.h
 /home/noxy/cpp/silo_logging/include/debug.h
+
+/home/noxy/cpp/silo_logging/include/string.h
+stdio.h
+-
+stdint.h
+-
 
 /home/noxy/cpp/silo_logging/include/transaction.h
 cstdint
@@ -247,6 +257,8 @@ include/result.h
 /home/noxy/cpp/silo_logging/logger.cpp
 include/logger.h
 /home/noxy/cpp/silo_logging/include/logger.h
+mutex
+-
 
 /home/noxy/cpp/silo_logging/main.cpp
 iostream
@@ -257,6 +269,8 @@ thread
 -
 include/atomic_tool.h
 /home/noxy/cpp/silo_logging/include/atomic_tool.h
+include/atomic_wrapper.h
+/home/noxy/cpp/silo_logging/include/atomic_wrapper.h
 include/common.h
 /home/noxy/cpp/silo_logging/include/common.h
 include/util_silo.h
@@ -283,6 +297,24 @@ include/zipf.h
 /home/noxy/cpp/silo_logging/include/zipf.h
 
 /home/noxy/cpp/silo_logging/notifier.cpp
+iostream
+-
+include/notifier.h
+/home/noxy/cpp/silo_logging/include/notifier.h
+
+/home/noxy/cpp/silo_logging/result.cpp
+iostream
+-
+cmath
+-
+include/result.h
+/home/noxy/cpp/silo_logging/include/result.h
+
+/home/noxy/cpp/silo_logging/result_log.cpp
+include/result.h
+/home/noxy/cpp/silo_logging/include/result.h
+include/cache_line_size.h
+/home/noxy/cpp/silo_logging/include/cache_line_size.h
 
 /home/noxy/cpp/silo_logging/silo_result.cpp
 vector
@@ -295,6 +327,12 @@ include/common.h
 /home/noxy/cpp/silo_logging/include/common.h
 
 /home/noxy/cpp/silo_logging/transaction.cpp
+algorithm
+-
+unistd.h
+-
+bitset
+-
 include/atomic_tool.h
 /home/noxy/cpp/silo_logging/include/atomic_tool.h
 include/log.h
@@ -307,6 +345,10 @@ include/transaction_log.h
 /home/noxy/cpp/silo_logging/include/transaction_log.h
 include/notifier.h
 /home/noxy/cpp/silo_logging/include/notifier.h
+include/string.h
+/home/noxy/cpp/silo_logging/include/string.h
+include/atomic_wrapper.h
+/home/noxy/cpp/silo_logging/include/atomic_wrapper.h
 
 /home/noxy/cpp/silo_logging/util.cpp
 include/atomic_tool.h

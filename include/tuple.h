@@ -20,7 +20,9 @@ struct TIDword {
 
     TIDword() : epoch(0), TID(0), absent(false), latest(true), lock(false) {};
     
-    // operatorは後で実装
+    bool operator == (const TIDword &right) const { return obj_ == right.obj_; }
+    bool operator != (const TIDword &right) const { return !operator == (right); }
+    bool operator < (const TIDword &right) const { return this->obj_ < right.obj_; }
 
 };
 

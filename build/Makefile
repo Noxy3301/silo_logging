@@ -231,6 +231,60 @@ notifier.cpp.s:
 	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/notifier.cpp.s
 .PHONY : notifier.cpp.s
 
+result.o: result.cpp.o
+
+.PHONY : result.o
+
+# target to build an object file
+result.cpp.o:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/result.cpp.o
+.PHONY : result.cpp.o
+
+result.i: result.cpp.i
+
+.PHONY : result.i
+
+# target to preprocess a source file
+result.cpp.i:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/result.cpp.i
+.PHONY : result.cpp.i
+
+result.s: result.cpp.s
+
+.PHONY : result.s
+
+# target to generate assembly for a file
+result.cpp.s:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/result.cpp.s
+.PHONY : result.cpp.s
+
+result_log.o: result_log.cpp.o
+
+.PHONY : result_log.o
+
+# target to build an object file
+result_log.cpp.o:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/result_log.cpp.o
+.PHONY : result_log.cpp.o
+
+result_log.i: result_log.cpp.i
+
+.PHONY : result_log.i
+
+# target to preprocess a source file
+result_log.cpp.i:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/result_log.cpp.i
+.PHONY : result_log.cpp.i
+
+result_log.s: result_log.cpp.s
+
+.PHONY : result_log.s
+
+# target to generate assembly for a file
+result_log.cpp.s:
+	$(MAKE) -f CMakeFiles/silo.exe.dir/build.make CMakeFiles/silo.exe.dir/result_log.cpp.s
+.PHONY : result_log.cpp.s
+
 silo_result.o: silo_result.cpp.o
 
 .PHONY : silo_result.o
@@ -333,6 +387,12 @@ help:
 	@echo "... notifier.o"
 	@echo "... notifier.i"
 	@echo "... notifier.s"
+	@echo "... result.o"
+	@echo "... result.i"
+	@echo "... result.s"
+	@echo "... result_log.o"
+	@echo "... result_log.i"
+	@echo "... result_log.s"
 	@echo "... silo_result.o"
 	@echo "... silo_result.i"
 	@echo "... silo_result.s"

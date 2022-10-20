@@ -45,10 +45,10 @@ class TxExecutor {
 
         void abort();
         virtual void begin();
-        void tx_delete(uint64_t key);
-        void displayWriteSet();
+        // void tx_delete(uint64_t key);
+        // void displayWriteSet();
         Tuple *get_tuple(Tuple *table, uint64_t key) { return &table[key]; }
-        void insert();  // 使わない気がするから未定義で
+        // void insert();  // 使わない気がするから未定義で
         void lockWriteSet();
         void read(uint64_t key);
         ReadElement<Tuple> *searchReadSet(uint64_t key);
@@ -56,8 +56,7 @@ class TxExecutor {
         void unlockWriteSet();
         void unlockWriteSet(std::vector<WriteElement<Tuple>>::iterator end);    // Q:?
         bool validationPhase();
-        virtual void wal(uint64_t ctid);    // 使わない気がする、というかナニコレ？
-        // void write(uint64_t key, std::string_view val = "");    // そもそもstring_viewはSGX対応してなさそうだしつかない方が良いかも、kv形式にしたいかも
-        void write(uint64_t key);   // TODO:あとでvalueを受け取るようにする
+        // virtual void wal(uint64_t ctid);    // 使わない気がする、というかナニコレ？
+        void write(uint64_t key, std::string_view val = "");    // そもそもstring_viewはSGX対応してなさそうだしつかない方が良いかも、kv形式にしたいかも
         virtual void writePhase();
 };

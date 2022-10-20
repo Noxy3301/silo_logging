@@ -40,6 +40,7 @@ CMakeFiles/silo.exe.dir/logger.cpp.o
  /home/noxy/cpp/silo_logging/logger.cpp
 CMakeFiles/silo.exe.dir/main.cpp.o
  /home/noxy/cpp/silo_logging/include/atomic_tool.h
+ /home/noxy/cpp/silo_logging/include/atomic_wrapper.h
  /home/noxy/cpp/silo_logging/include/cache_line_size.h
  /home/noxy/cpp/silo_logging/include/common.h
  /home/noxy/cpp/silo_logging/include/consts.h
@@ -65,7 +66,22 @@ CMakeFiles/silo.exe.dir/main.cpp.o
  /home/noxy/cpp/silo_logging/include/zipf.h
  /home/noxy/cpp/silo_logging/main.cpp
 CMakeFiles/silo.exe.dir/notifier.cpp.o
+ /home/noxy/cpp/silo_logging/include/cache_line_size.h
+ /home/noxy/cpp/silo_logging/include/common.h
+ /home/noxy/cpp/silo_logging/include/consts.h
+ /home/noxy/cpp/silo_logging/include/int64byte.h
+ /home/noxy/cpp/silo_logging/include/notifier.h
+ /home/noxy/cpp/silo_logging/include/tsc.h
+ /home/noxy/cpp/silo_logging/include/tuple.h
  /home/noxy/cpp/silo_logging/notifier.cpp
+CMakeFiles/silo.exe.dir/result.cpp.o
+ /home/noxy/cpp/silo_logging/include/cache_line_size.h
+ /home/noxy/cpp/silo_logging/include/result.h
+ /home/noxy/cpp/silo_logging/result.cpp
+CMakeFiles/silo.exe.dir/result_log.cpp.o
+ /home/noxy/cpp/silo_logging/include/cache_line_size.h
+ /home/noxy/cpp/silo_logging/include/result.h
+ /home/noxy/cpp/silo_logging/result_log.cpp
 CMakeFiles/silo.exe.dir/silo_result.cpp.o
  /home/noxy/cpp/silo_logging/include/cache_line_size.h
  /home/noxy/cpp/silo_logging/include/common.h
@@ -76,6 +92,7 @@ CMakeFiles/silo.exe.dir/silo_result.cpp.o
  /home/noxy/cpp/silo_logging/silo_result.cpp
 CMakeFiles/silo.exe.dir/transaction.cpp.o
  /home/noxy/cpp/silo_logging/include/atomic_tool.h
+ /home/noxy/cpp/silo_logging/include/atomic_wrapper.h
  /home/noxy/cpp/silo_logging/include/cache_line_size.h
  /home/noxy/cpp/silo_logging/include/common.h
  /home/noxy/cpp/silo_logging/include/consts.h
@@ -89,6 +106,7 @@ CMakeFiles/silo.exe.dir/transaction.cpp.o
  /home/noxy/cpp/silo_logging/include/procedure.h
  /home/noxy/cpp/silo_logging/include/result.h
  /home/noxy/cpp/silo_logging/include/silo_op_element.h
+ /home/noxy/cpp/silo_logging/include/string.h
  /home/noxy/cpp/silo_logging/include/transaction.h
  /home/noxy/cpp/silo_logging/include/transaction_log.h
  /home/noxy/cpp/silo_logging/include/tsc.h

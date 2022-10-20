@@ -1,5 +1,7 @@
 #include "include/logger.h"
 
+#include <mutex>
+
 // Nodeにloggerとworkerを担うCPU(コア)を振り分ける
 // Nodeに均等にCPUを割り振って、thread_num > num_cpusなら最後のworkerがloggerを兼任、そうじゃないならworkerの最後のやつをloggerに転職
 void LoggerAffinity::init(unsigned worker_num, unsigned logger_num) {
@@ -41,6 +43,13 @@ void Logger::add_tx_executor(TxExecutorLog &trans) {
     thid_set_.emplace(trans.thid_);
 }
 
+void Logger::worker() {
+    // logging機構は一旦飛ばす, 最後のfinish処理だけ実装して一旦終わらせる
+    notifier_stats_.logger_end(this);
+    logger_end();
+    // show_result();
+}
+
 void Logger::worker_end(int thid) {
     std::unique_lock<std::mutex> lock(mutex_);
     thid_set_.erase(thid);
@@ -48,4 +57,11 @@ void Logger::worker_end(int thid) {
         queue_.terminate();
     }
     cv_finish_.wait(lock, [this]{return joined_;});     // Q:?
+}
+
+void Logger::logger_end() {
+    // logfile.close(); // TODO: LOGWRITERを実装してないからここはいったん延期
+    std::lock_guard<std::mutex> lock(mutex_);
+    joined_ = true;
+    cv_finish_.notify_all();
 }

@@ -1,0 +1,13 @@
+# ninja log v5
+1	197	1666278133548373800	CMakeFiles/silo.exe.dir/result_log.cpp.o	1b8c2f1e1dc911e2
+1	272	1666278133628373800	CMakeFiles/silo.exe.dir/silo_result.cpp.o	b2b21c6f90ab5700
+1	795	1666278134148373800	CMakeFiles/silo.exe.dir/result.cpp.o	2b1cbe95d4358233
+1	1128	1666278134478373800	CMakeFiles/silo.exe.dir/notifier.cpp.o	fdb35513606dea06
+0	1172	1666278134528373800	CMakeFiles/silo.exe.dir/log_buffer.cpp.o	4835368737c79616
+2	1361	1666278134718373800	CMakeFiles/silo.exe.dir/util.cpp.o	163355887fddf28d
+0	1619	1666278134978373800	CMakeFiles/silo.exe.dir/logger.cpp.o	3eb8b6bef77ebe79
+1	1763	1666278135118373800	CMakeFiles/silo.exe.dir/transaction.cpp.o	ce92d0443f0afa7a
+0	2412	1666278135768373800	CMakeFiles/silo.exe.dir/main.cpp.o	b3de592b469fe874
+2412	2643	1666278135998373800	silo.exe	f5af87e1ccf862dc
+0	1630	1666278984398373800	CMakeFiles/silo.exe.dir/logger.cpp.o	3eb8b6bef77ebe79
+1630	1912	1666278984678373800	silo.exe	f5af87e1ccf862dc

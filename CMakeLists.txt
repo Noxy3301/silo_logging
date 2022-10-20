@@ -11,11 +11,15 @@ find_package(Threads REQUIRED)
 # file(GLOB_RECURSE PROJECT_HEADERS *.h)
 
 file(GLOB SILO_SOURCES
-    "main.cpp" "silo_result.cpp" "transaction.cpp" "util.cpp" "log_buffer.cpp" "logger.cpp" "notifier.cpp"   
+    "main.cpp" "silo_result.cpp" "transaction.cpp" "util.cpp" "log_buffer.cpp" "logger.cpp" "notifier.cpp" "result.cpp" "result_log.cpp"
 )
+
+set(CMAKE_CXX_FLAGS "-pthread -fpermissive")
 
 add_executable(silo.exe ${SILO_SOURCES})
 
 # add_executable(silo.exe ${PROJECT_SOURCES} ${PROJECT_HEADERS})
 
-target_link_libraries(silo.exe PUBLIC "-pthread")
+
+
+# target_link_libraries(silo.exe PUBLIC "-pthread -fpermissive")

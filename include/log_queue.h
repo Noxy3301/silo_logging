@@ -41,7 +41,7 @@ class LogQueue {
 
         void enq(LogBuffer* x) {    //入れる方
             {
-                std::lock_guard<std::mutex> lock(mutex_);   // mutex_を用いてLock, destructor時にlock解放できる
+                // std::lock_guard<std::mutex> lock(mutex_);   // mutex_を用いてLock, destructor時にlock解放できる
                 // TODO:auto &v = queue_[x->min_epoch_]; 一旦パス
             }   // ここでmutex_のlockが解放される
         }

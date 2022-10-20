@@ -16,6 +16,8 @@ alignas(CACHE_LINE_SIZE) GLOBAL uint64_t_64byte GlobalEpoch;
 #endif
 
 alignas(CACHE_LINE_SIZE) GLOBAL uint64_t_64byte *ThLocalEpoch;
+alignas(CACHE_LINE_SIZE) GLOBAL uint64_t_64byte *CTIDW;
+
 alignas(CACHE_LINE_SIZE) GLOBAL Tuple *Table;
 
 // common_log

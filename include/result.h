@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <vector>
 
 #include "cache_line_size.h"
 
