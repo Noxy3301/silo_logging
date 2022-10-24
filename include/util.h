@@ -11,6 +11,31 @@
 #include "tsc.h"
 #include "zipf.h"
 
+// TODO:コピペなのでいるか精査する
+class LibcError : public std::exception {
+private:
+  std::string str_;
+
+  static std::string generateMessage(int errnum, const std::string &msg) {
+    std::string s(msg);
+    const size_t BUF_SIZE = 1024;
+    char buf[BUF_SIZE];
+    ::snprintf(buf, 1024, " %d ", errnum);
+    s += buf;
+#ifdef Linux
+    if (::strerror_r(errnum, buf, BUF_SIZE) != nullptr)
+#endif  // Linux
+#ifdef Darwin
+    if (::strerror_r(errnum, buf, BUF_SIZE) != 0)
+#endif  // Darwin
+    s += buf;
+    return s;
+  }
+
+public:
+  explicit LibcError(int errnum = errno, const std::string &msg = "libc_error:")
+          : str_(generateMessage(errnum, msg)) {}
+};
 
 inline static bool chkClkSpan(const uint64_t start, const uint64_t stop, const uint64_t threshold) {
     uint64_t diff = 0;
@@ -26,7 +51,7 @@ inline static void makeProcedure(std::vector<Procedure> &pro, Xoroshiro128Plus &
                                  size_t tuple_num, size_t max_ope, size_t thread_num, size_t rraito,
                                  bool rmw, bool ycsb, bool partition, size_t thread_id, Result &res) {
     pro.clear();
-    bool ronly_flag = true, wonly_flag = true;
+    bool ronly_flag(true), wonly_flag(true);
     for (size_t i = 0; i < max_ope; i++) {
         uint64_t tmpkey;
         // keyの決定
@@ -53,6 +78,7 @@ inline static void makeProcedure(std::vector<Procedure> &pro, Xoroshiro128Plus &
             wonly_flag = false;
             pro.emplace_back(Ope::READ, tmpkey);
         } else {
+            ronly_flag = false;
             if (rmw) {
                 // 使わないけど実装だけ
                 pro.emplace_back(Ope::READ_MODIFY_WRITE, tmpkey);

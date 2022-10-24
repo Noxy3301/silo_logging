@@ -14,7 +14,7 @@ file(GLOB SILO_SOURCES
     "main.cpp" "silo_result.cpp" "transaction.cpp" "util.cpp" "log_buffer.cpp" "logger.cpp" "notifier.cpp" "result.cpp" "result_log.cpp"
 )
 
-set(CMAKE_CXX_FLAGS "-pthread -fpermissive")
+set(CMAKE_CXX_FLAGS "-pthread -fpermissive -Wreturn-type")
 
 add_executable(silo.exe ${SILO_SOURCES})
 

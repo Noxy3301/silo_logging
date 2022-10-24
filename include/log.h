@@ -10,7 +10,7 @@ class LogHeader {
     public:
         int chkSum_ = 0;
         unsigned int logRecNum_ = 0;    // Q:?
-        const size_t len_val_ = VAL_SIZE;
+        const std::size_t len_val_ = VAL_SIZE;
 
         void init() {
             chkSum_ = 0;

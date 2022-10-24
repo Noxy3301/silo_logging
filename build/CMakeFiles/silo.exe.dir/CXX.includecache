@@ -33,9 +33,31 @@ int64byte.h
 /home/noxy/cpp/silo_logging/include/debug.h
 
 /home/noxy/cpp/silo_logging/include/fileio.h
+fcntl.h
+-
+sys/ioctl.h
+-
+sys/stat.h
+-
+sys/types.h
+-
+unistd.h
+-
+atomic
+-
+mutex
+-
+stdexcept
+-
 string
 -
-iostream
+cstring
+-
+debug.h
+/home/noxy/cpp/silo_logging/include/debug.h
+util.h
+/home/noxy/cpp/silo_logging/include/util.h
+linux/fs.h
 -
 
 /home/noxy/cpp/silo_logging/include/int64byte.h
@@ -91,10 +113,14 @@ vector
 -
 consts.h
 /home/noxy/cpp/silo_logging/include/consts.h
-log_buffer.h
-/home/noxy/cpp/silo_logging/include/log_buffer.h
 
 /home/noxy/cpp/silo_logging/include/log_writer.h
+fcntl.h
+-
+unistd.h
+-
+iostream
+-
 
 /home/noxy/cpp/silo_logging/include/logger.h
 mutex
@@ -244,21 +270,13 @@ vector
 random.h
 /home/noxy/cpp/silo_logging/include/random.h
 
-/home/noxy/cpp/silo_logging/log_buffer.cpp
-include/log_buffer.h
-/home/noxy/cpp/silo_logging/include/log_buffer.h
-include/log_queue.h
-/home/noxy/cpp/silo_logging/include/log_queue.h
-include/notifier.h
-/home/noxy/cpp/silo_logging/include/notifier.h
-include/result.h
-/home/noxy/cpp/silo_logging/include/result.h
-
 /home/noxy/cpp/silo_logging/logger.cpp
-include/logger.h
-/home/noxy/cpp/silo_logging/include/logger.h
 mutex
 -
+sys/stat.h
+-
+include/logger.h
+/home/noxy/cpp/silo_logging/include/logger.h
 
 /home/noxy/cpp/silo_logging/main.cpp
 iostream
@@ -296,36 +314,6 @@ include/util.h
 include/zipf.h
 /home/noxy/cpp/silo_logging/include/zipf.h
 
-/home/noxy/cpp/silo_logging/notifier.cpp
-iostream
--
-include/notifier.h
-/home/noxy/cpp/silo_logging/include/notifier.h
-
-/home/noxy/cpp/silo_logging/result.cpp
-iostream
--
-cmath
--
-include/result.h
-/home/noxy/cpp/silo_logging/include/result.h
-
-/home/noxy/cpp/silo_logging/result_log.cpp
-include/result.h
-/home/noxy/cpp/silo_logging/include/result.h
-include/cache_line_size.h
-/home/noxy/cpp/silo_logging/include/cache_line_size.h
-
-/home/noxy/cpp/silo_logging/silo_result.cpp
-vector
--
-include/cache_line_size.h
-/home/noxy/cpp/silo_logging/include/cache_line_size.h
-include/result.h
-/home/noxy/cpp/silo_logging/include/result.h
-include/common.h
-/home/noxy/cpp/silo_logging/include/common.h
-
 /home/noxy/cpp/silo_logging/transaction.cpp
 algorithm
 -
@@ -349,16 +337,6 @@ include/string.h
 /home/noxy/cpp/silo_logging/include/string.h
 include/atomic_wrapper.h
 /home/noxy/cpp/silo_logging/include/atomic_wrapper.h
-
-/home/noxy/cpp/silo_logging/util.cpp
-include/atomic_tool.h
-/home/noxy/cpp/silo_logging/include/atomic_tool.h
-include/util_silo.h
-/home/noxy/cpp/silo_logging/include/util_silo.h
-include/util.h
-/home/noxy/cpp/silo_logging/include/util.h
-include/notifier.h
-/home/noxy/cpp/silo_logging/include/notifier.h
-include/common.h
-/home/noxy/cpp/silo_logging/include/common.h
+include/fileio.h
+/home/noxy/cpp/silo_logging/include/fileio.h
 

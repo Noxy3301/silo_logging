@@ -72,6 +72,6 @@ class WriteElement : public OpElement<T> {
 
     private:
         // Q:?
-        std::unique_ptr<char[]> val_ptr_;   // NOLINT
+        std::unique_ptr<char[]> val_ptr_; // NOLINT
         std::size_t val_length_{};
 };

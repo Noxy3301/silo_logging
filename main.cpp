@@ -61,8 +61,8 @@ void worker_th(int thid, char &ready, const bool &start, const bool &quit, std::
     RETRY:
         // m.lock(); std::cout << "running_" << thid << std::endl; m.unlock();
         if (thid == 0) leaderWork(epoch_timer_start, epoch_timer_stop);
-        // trans.durableEpochWork(epoch_timer_start, epoch_timer_stop, quit);
-        // DURABLE EPOCHの話はやらなくてもよさげ？
+        trans.durableEpochWork(epoch_timer_start, epoch_timer_stop, quit);
+        
         if (__atomic_load_n(&quit, __ATOMIC_ACQUIRE)) break;
         
         trans.begin();
@@ -98,11 +98,10 @@ void worker_th(int thid, char &ready, const bool &start, const bool &quit, std::
 
 
 void logger_th(int thid, Notifier &notifier, std::atomic<Logger*> *logp) {
-
     alignas(CACHE_LINE_SIZE) Logger logger(thid, notifier);
-    // TODO:未実装 notifier.add_logger(&logger);
+    notifier.add_logger(&logger);
     logp->store(&logger);
-    logger.worker();    // TODO:未実装
+    logger.worker();
     return;
 }
 
@@ -174,7 +173,6 @@ int main() {
     SiloResult.resize(THREAD_NUM);  // threadの個数だけresultを格納するvectorを生成しておく
     std::vector<char> readys(THREAD_NUM);
 
-    // TODO: workerとloggerの作成
     std::atomic<Logger *> logs[LOGGER_NUM];
     Notifier notifier;
     std::vector<std::thread> lthv;  // logger threads

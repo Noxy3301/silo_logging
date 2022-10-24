@@ -49,15 +49,14 @@ class Logger {
         std::vector<int> thid_vec_;
         std::unordered_set<int> thid_set_;
         LogQueue queue_;
-        // PosixWriter logfile_;    // LOGWRITER
+        PosixWriter logfile_;
         std::string logdir_;
         std::string logpath_;
         std::uint64_t rotate_epoch_ = 100;
         Notifier notifier_;
         Notifier &notifier_stats_;
         // NidStats nid_stats_;
-        // NidBuffer nid_buffer_;
-
+        NidBuffer nid_buffer_;
         std::size_t byte_count_ = 0;
         std::size_t write_count_ = 0;
         std::size_t buffer_count_ = 0;
@@ -71,9 +70,9 @@ class Logger {
 
         void add_tx_executor(TxExecutorLog &trans);
         void worker();
-        // void send_nid_to_notifier(); この3つ実装しないかも
-        // std::uint64_t find_min_epoch();
-        // void wait_deq();
+        void send_nid_to_notifier(std::uint64_t min_epoch, bool quit);
+        std::uint64_t find_min_epoch();
+        void wait_deq();
         void worker_end(int thid);
         void logger_end();
 };

@@ -26,3 +26,5 @@
 #define VAL_SIZE 4
 
 #define PAGE_SIZE 4096
+
+#define LOGSET_SIZE 1000

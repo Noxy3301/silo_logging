@@ -16,6 +16,8 @@
 #include "include/string.h"
 #include "include/atomic_wrapper.h"
 
+#include "include/fileio.h"
+
 TxExecutor::TxExecutor(int thid, Result *sres) : thid_(thid), sres_(sres) {
     read_set_.reserve(MAX_OPE);
     write_set_.reserve(MAX_OPE);
@@ -165,19 +167,13 @@ bool TxExecutor::validationPhase() {
     for (auto itr = read_set_.begin(); itr != read_set_.end(); itr++) {
         // 1. tid of read_set_ changed from it that was got in Read Phase.
         check.obj_ = loadAcquire((*itr).rcdptr_->tidword_.obj_);
-        #ifdef DEBUG
-            std::cout << (*itr).get_tidword().epoch << " " << check.epoch << std::endl;
-            std::cout << check.epoch << " " << check.TID << " " << check.absent << " " << check.latest << " " << check.lock << std::endl;
-        #endif
         if ((*itr).get_tidword().epoch != check.epoch || (*itr).get_tidword().TID != check.TID) {
             this->status_ = TransactionStatus::Aborted;
             unlockWriteSet();
             return false;
         }
         // 2. "omit" if (!check.latest) return false;
-        #ifdef DEBUG
-            std::cout << "sreh" << std::endl;   // tokuni imi ha nai
-        #endif
+        
         // 3. the tuple is locked and it isn't included by its write set.
         if (check.lock && !searchWriteSet((*itr).key_)) {
             this->status_ = TransactionStatus::Aborted;
@@ -190,6 +186,29 @@ bool TxExecutor::validationPhase() {
     // goto Phase 3
     this->status_ = TransactionStatus::Committed;
     return true;
+}
+
+void TxExecutor::wal(std::uint64_t ctid) {
+    for (auto itr = write_set_.begin(); itr != write_set_.end(); itr++) {
+        LogRecord log(ctid, (*itr).key_, write_val_);
+        log_set_.emplace_back(log);
+        latest_log_header_.chkSum_ += log.computeChkSum();
+        latest_log_header_.logRecNum_++;
+    }
+
+    if (log_set_.size() > LOGSET_SIZE / 2) {    // log吐き出さないと
+        // prepare write header
+        latest_log_header_.convertChkSumIntoComplementOnTwo();
+        // write header
+        printf("head\n");
+        logfile_.write((void *) &latest_log_header_, sizeof(LogHeader));
+        // write log record
+        printf("lg\n");
+        logfile_.write((void *) &(log_set_[0]), sizeof(LogRecord) * latest_log_header_.logRecNum_);
+
+        latest_log_header_.init();
+        log_set_.clear();
+    }
 }
 
 void TxExecutor::write(std::uint64_t key, std::string_view val) {
@@ -227,6 +246,8 @@ void TxExecutor::writePhase() {
     maxtid.latest = 1;
     mrctid_ = maxtid;
 
+    wal(maxtid.obj_);
+
     // write [record, commit_tid]
     for (auto itr = write_set_.begin(); itr != write_set_.end(); itr++) {
         // update and unlock
@@ -245,11 +266,26 @@ void TxExecutor::writePhase() {
 
 
 
-TxExecutorLog::TxExecutorLog(int thid, ResultLog *sres_log) : TxExecutor(thid, &(sres_log->result_)), sres_log_(sres_log) {}
+TxExecutorLog::TxExecutorLog(int thid, ResultLog *sres_lg) : TxExecutor(thid, &(sres_lg->result_)), sres_lg_(sres_lg) {}
 
 void TxExecutorLog::begin() {
     TxExecutor::begin();
+    nid_ = NotificationId(nid_counter_++, thid_, rdtscp());
 }
+
+void TxExecutorLog::wal(std::uint64_t ctid) {
+    TIDword old_tid;
+    TIDword new_tid;
+    old_tid.obj_ = loadAcquire(CTIDW[thid_].obj_);
+    new_tid.obj_ = ctid;
+    bool new_epoch_begins = (old_tid.epoch != new_tid.epoch);
+    log_buffer_pool_.push(ctid, nid_, write_set_, write_val_, new_epoch_begins);
+    if (new_epoch_begins) {
+      // store CTIDW
+      __atomic_store_n(&(CTIDW[thid_].obj_), ctid, __ATOMIC_RELEASE);
+    }
+}
+
 
 bool TxExecutorLog::pauseCondition() {
     auto dlepoch = loadAcquire(ThLocalDurableEpoch[logger_thid_].obj_);
@@ -274,8 +310,24 @@ void TxExecutorLog::epochWork(uint64_t &epoch_timer_start, uint64_t &epoch_timer
     }
 }
 
-// void TxExecutorLog::durableEpochWork(uint64_t &epoch_timer_start, uint64_t &epoch_timer_stop, const bool &quit) {
-//     std::uint64_t t = rdtscp();
-//     // pause this worker until Durable epoch catches up
-//     if (pauseCondition())
-// }
+// TODO:コピペなので要確認
+void TxExecutorLog::durableEpochWork(uint64_t &epoch_timer_start,
+                                   uint64_t &epoch_timer_stop, const bool &quit) {
+  std::uint64_t t = rdtscp();
+  // pause this worker until Durable epoch catches up
+  if (EPOCH_DIFF > 0) {
+    if (pauseCondition()) {
+      log_buffer_pool_.publish();
+      do {
+        epochWork(epoch_timer_start, epoch_timer_stop);
+        if (loadAcquire(quit)) return;
+      } while (pauseCondition());
+    }
+  }
+  while (!log_buffer_pool_.is_ready()) {
+    epochWork(epoch_timer_start, epoch_timer_stop);
+    if (loadAcquire(quit)) return;
+  }
+  if (log_buffer_pool_.current_buffer_==NULL) std::abort();
+  sres_lg_->local_wait_depoch_latency_ += rdtscp() - t;
+}

@@ -17,13 +17,17 @@
 #define NID_BUFFER_SIZE (LOG_BUFFER_SIZE/4)     // maybe unused
 
 class LogQueue;
+class NotificationId;
+class Notifier;
+class NidStats;
+class NidBuffer;
 class LogBufferPool;
 
 class LogBuffer {
     private:
         LogRecord *log_set_;
         LogRecord *log_set_ptr_;
-        // std::vector<NotificationID> nid_set_;    nidは実装予定なし
+        std::vector<NotificationId> nid_set_;    // nidは実装予定なしだったけどめんどいのでやる
         LogBufferPool &pool_;
     
     public:
@@ -31,11 +35,13 @@ class LogBuffer {
         uint64_t min_epoch_ = ~(uint64_t)0;
         uint64_t max_epoch_ = 0;
 
-        void push(std::uint64_t, std::vector<WriteElement<Tuple>> &write_set, char *val);   // Nidない
+        void push(std::uint64_t tid, NotificationId &nid, std::vector<WriteElement<Tuple>> &write_set, char *val);
+        void pass_nid(NidBuffer &nid_buffer, NidStats &nid_stats, std::uint64_t deq_time);
         void return_buffer();
-        void empty();
+        bool empty();
 
         LogBuffer(LogBufferPool &pool) : pool_(pool) {
+            nid_set_.reserve(NID_BUFFER_SIZE);
             void *ptr = log_set_ptr_ = new LogRecord[LOG_ALLOC_SIZE];
             std::size_t space = LOG_ALLOC_SIZE * sizeof(LogRecord);
             std::align(512, LOG_BUFFER_SIZE * sizeof(LogRecord), ptr, space);
@@ -116,7 +122,7 @@ class LogBufferPool {
         }
         
         bool is_ready();
-        void push(std::uint64_t tid, std::vector<WriteElement<Tuple>> &write_set, char *val, bool new_epoch_begins);    //Nid入れてないから確認しろ
+        void push(std::uint64_t tid, NotificationId &nid, std::vector<WriteElement<Tuple>> &write_set, char *val, bool new_epoch_begins);
         void publish();
         void return_buffer(LogBuffer *lb);
         void terminate(ResultLog &myres);

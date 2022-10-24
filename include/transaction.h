@@ -13,6 +13,7 @@
 #include "silo_op_element.h"
 #include "tuple.h"
 
+#define LOGSET_SIZE 1000
 
 enum class TransactionStatus : uint8_t {
     InFlight,
@@ -47,16 +48,16 @@ class TxExecutor {
         virtual void begin();
         // void tx_delete(uint64_t key);
         // void displayWriteSet();
-        Tuple *get_tuple(Tuple *table, uint64_t key) { return &table[key]; }
+        Tuple *get_tuple(Tuple *table, std::uint64_t key) { return &table[key]; }
         // void insert();  // 使わない気がするから未定義で
         void lockWriteSet();
-        void read(uint64_t key);
-        ReadElement<Tuple> *searchReadSet(uint64_t key);
-        WriteElement<Tuple> *searchWriteSet(uint64_t key);
+        void read(std::uint64_t key);
+        ReadElement<Tuple> *searchReadSet(std::uint64_t key);
+        WriteElement<Tuple> *searchWriteSet(std::uint64_t key);
         void unlockWriteSet();
         void unlockWriteSet(std::vector<WriteElement<Tuple>>::iterator end);    // Q:?
         bool validationPhase();
-        // virtual void wal(uint64_t ctid);    // 使わない気がする、というかナニコレ？
+        virtual void wal(std::uint64_t ctid);    // write ahead logging
         void write(uint64_t key, std::string_view val = "");    // そもそもstring_viewはSGX対応してなさそうだしつかない方が良いかも、kv形式にしたいかも
         virtual void writePhase();
 };

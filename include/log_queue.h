@@ -8,7 +8,9 @@
 #include <vector>
 
 #include "consts.h"
-#include "log_buffer.h" // TODO:いらないかも？
+//#include "log_buffer.h" // TODO:いらないかも？
+
+class LogBuffer;
 
 class LogQueue {
     private:
@@ -41,21 +43,40 @@ class LogQueue {
 
         void enq(LogBuffer* x) {    //入れる方
             {
-                // std::lock_guard<std::mutex> lock(mutex_);   // mutex_を用いてLock, destructor時にlock解放できる
-                // TODO:auto &v = queue_[x->min_epoch_]; 一旦パス
+                std::lock_guard<std::mutex> lock(mutex_);   // mutex_を用いてLock, destructor時にlock解放できる
+                auto &v = queue_[x->min_epoch_];
+                v.emplace_back(x);
             }   // ここでmutex_のlockが解放される
+            cv_deq_.notify_one();
         }
 
-        void wait_deq() {
-            // TODO:
+        bool wait_deq() {
+            if (quit_.load() || !queue_.empty()) return true;
+            std::unique_lock<std::mutex> lock(mutex_);
+            return cv_deq_.wait_for(lock, timeout_, [this]{return quit_.load() || !queue_.empty();});
         }
 
-        void quit() {
-            // TODO:
+        bool quit() {
+            return quit_.load() && queue_.empty();
         }
         
         std::vector<LogBuffer*> deq() {
-            // TODO:
+            std::lock_guard<std::mutex> lock(mutex_);
+            size_t n_logbuf = 0;
+            for (auto itr = queue_.begin(); itr != queue_.end(); itr++) {
+                auto q = itr->second;
+                n_logbuf += q.size();
+            }
+            std::vector<LogBuffer*> ret;
+            ret.reserve(n_logbuf);
+            size_t byte_size = 0;
+            while (!queue_.empty()) {
+                auto itr = queue_.cbegin();
+                auto &v = itr->second;
+                std::copy(v.begin(), v.end(), std::back_inserter(ret));
+                queue_.erase(itr);
+            }
+            return ret;
         }
 
         bool empty() {
