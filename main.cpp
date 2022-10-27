@@ -20,11 +20,6 @@
 #include "include/util.h"
 #include "include/zipf.h"
 
-
-std::mutex m;
-
-
-
 void worker_th(int thid, char &ready, const bool &start, const bool &quit, std::atomic<Logger*> *logp) {
     ResultLog &myres_log = std::ref(SiloResult[thid]);
     Result &myres = std::ref(myres_log.result_);
@@ -145,6 +140,7 @@ void waitForReady(const std::vector<char> &readys) {
 }
 
 int main() {
+    displayParameter();
     LoggerAffinity affin;   // Nodeごとに管理する用のやつ
     affin.init(THREAD_NUM, LOGGER_NUM);
 
@@ -195,19 +191,16 @@ int main() {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000 * EXTIME));
     __atomic_store_n(&quit, true, __ATOMIC_RELEASE);
 
-    // m.lock(); std::cout << "owari!" << std::endl; m.unlock();
-
     for (auto &th : lthv) th.join();
-    // m.lock(); std::cout << "kokoka??" << std::endl; m.unlock();
     for (auto &th : wthv) th.join();
-
-    m.lock(); std::cout << "owari!!" << std::endl; m.unlock();
 
     for (unsigned int i = 0; i < THREAD_NUM; i++) {
         SiloResult[0].addLocalAllResult(SiloResult[i]);
     }
+    
+    notifier.display();
     SiloResult[0].displayAllResult(CLOCKS_PER_US, EXTIME, THREAD_NUM);
-    // notifier.display();
+    
 
     return 0;
 }

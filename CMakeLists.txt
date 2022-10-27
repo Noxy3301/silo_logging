@@ -14,7 +14,13 @@ file(GLOB SILO_SOURCES
     "main.cpp" "silo_result.cpp" "transaction.cpp" "util.cpp" "log_buffer.cpp" "logger.cpp" "notifier.cpp" "result.cpp" "result_log.cpp"
 )
 
-set(CMAKE_CXX_FLAGS "-pthread -fpermissive -Wreturn-type")
+#set(CMAKE_CXX_FLAGS "-pthread -fpermissive -Wreturn-type")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wreturn-type")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Winvalid-memory-model")
+
 
 add_executable(silo.exe ${SILO_SOURCES})
 

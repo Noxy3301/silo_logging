@@ -5,6 +5,7 @@
 
 #include "include/notifier.h"
 #include "include/debug.h"
+#include "include/logger.h"
 
 void PepochFile::open() {
     fd_ = ::open(file_name_.c_str(), O_CREAT|O_TRUNC|O_RDWR, 0644);
@@ -43,49 +44,33 @@ void Notifier::add_logger(Logger *logger) {
 
 // TODO:コピペなので要理解
 uint64_t Notifier::check_durable() {
-  // calculate min(d_l)
-  uint64_t min_dl = __atomic_load_n(&(ThLocalDurableEpoch[0].obj_), __ATOMIC_ACQUIRE);
-  for (unsigned int i=1; i < LOGGER_NUM; ++i) {
-    uint64_t dl = __atomic_load_n(&(ThLocalDurableEpoch[i].obj_), __ATOMIC_ACQUIRE);
-    if (dl < min_dl) {
-      min_dl = dl;
+    // calculate min(d_l)
+    uint64_t min_dl = __atomic_load_n(&(ThLocalDurableEpoch[0].obj_), __ATOMIC_ACQUIRE);
+    for (unsigned int i=1; i < LOGGER_NUM; ++i) {
+        uint64_t dl = __atomic_load_n(&(ThLocalDurableEpoch[i].obj_), __ATOMIC_ACQUIRE);
+        if (dl < min_dl) {
+            min_dl = dl;
+        }
     }
-  }
-  uint64_t d = __atomic_load_n(&(DurableEpoch.obj_), __ATOMIC_ACQUIRE);
-  if (d < min_dl) {
-    bool b = __atomic_compare_exchange_n(&(DurableEpoch.obj_), &d, min_dl, false,
-                                         __ATOMIC_RELEASE, __ATOMIC_ACQUIRE);
-    if (b) {
-      // store Durable Epoch
-      pepoch_file_.write(min_dl);
+    uint64_t d = __atomic_load_n(&(DurableEpoch.obj_), __ATOMIC_ACQUIRE);
+    if (d < min_dl) {
+        bool b = __atomic_compare_exchange_n(&(DurableEpoch.obj_), &d, min_dl, false, __ATOMIC_RELEASE, __ATOMIC_ACQUIRE);
+        if (b) {
+            // store Durable Epoch
+            pepoch_file_.write(min_dl);
+        }
     }
-  }
-  return min_dl;
+    return min_dl;
 }
 
 // // TODO:コピペなので要理解
-// void Notifier::make_durable(NidBuffer &nid_buffer, bool quit) {
-//   __atomic_fetch_add(&try_count_, 1, __ATOMIC_ACQ_REL);
-//   auto min_dl = check_durable();
-//   if (nid_buffer.min_epoch() > min_dl) return;
-//   // notify client
-//   uint64_t epoch = (quit) ? (~(uint64_t)0) : min_dl;
-//   NotifyStats stats;
-//   nid_buffer.notify(epoch, stats);
-//   if (stats.count_ > 0) {
-//     notify_stats_.add(stats);
-//     notify_stats_.add_hist(stats);
-//     //printf("stats.hist_.size()=%zd, notify_stats_.hist_.size()=%zd\n",stats.hist_.size(),notify_stats_.hist_.size());
-//     if (FLAGS_latency_log) {
-//       uint64_t t = rdtscp();
-//       latency_log_->emplace_back(
-//         std::array<std::uint64_t,6>{
-//           min_dl, t-start_clock_, stats.count_, stats.latency_/stats.count_,
-//             stats.min_latency_, stats.max_latency_,
-//             });
-//     }
-//   }
-// }
+void Notifier::make_durable(NidBuffer &nid_buffer, bool quit) {
+    __atomic_fetch_add(&try_count_, 1, __ATOMIC_ACQ_REL);
+    auto min_dl = check_durable();
+    if (nid_buffer.min_epoch() > min_dl) return;
+    // notify client
+    // NotifyStatsを使っていないので省略
+}
 
 // // TODO:コピペなので要理解
 // void NidBuffer::notify(std::uint64_t min_dl, NotifyStats &stats) {
@@ -153,11 +138,31 @@ uint64_t Notifier::check_durable() {
 
 void Notifier::logger_end(Logger *logger) {
     std::unique_lock<std::mutex> lock(mutex_);
-    // nid_stats_.add();    実装予定なし？
-    
-    // analyze関連っぽいから実装しなくてもいいかも？
 
-    // std::cout << "unchiburi" << logger << std::endl;
+    byte_count_ += logger->byte_count_;
+    write_count_ += logger->write_count_;
+    buffer_count_ += logger->buffer_count_;
+    write_latency_ += logger->write_latency_;
+    wait_latency_ += logger->wait_latency_;
+    throughput_ += (double)logger->byte_count_/logger->write_latency_;
 
     logger_set_.erase(logger);
+}
+
+void Notifier::display() {
+    double cps = CLOCKS_PER_US*1e6;
+    size_t n = LOGGER_NUM;
+    std::cout << "wait_time[s]:\t"  << wait_latency_/cps  << std::endl;
+    std::cout << "write_time[s]:\t" << write_latency_/cps << std::endl;
+    std::cout << "write_count:\t"   << write_count_       << std::endl;
+    std::cout << "byte_count[B]:\t" << byte_count_        << std::endl;
+    std::cout << "buffer_count:\t"  << buffer_count_      << std::endl;
+
+    std::cout << "throughput(thread_sum)[B/s]:\t" << throughput_*cps                           << std::endl;
+    std::cout << "throughput(byte_sum)[B/s]:\t"   << cps*byte_count_/write_latency_*n          << std::endl;
+    std::cout << "throughput(elap)[B/s]:\t"       << cps*byte_count_/(write_end_-write_start_) << std::endl;
+
+    std::cout << "try_count:\t"     << try_count_ << std::endl; // make_durable未実装なので使えないけどこれ何意味している？
+    uint64_t d = __atomic_load_n(&(DurableEpoch.obj_), __ATOMIC_ACQUIRE);
+    std::cout << "durable_epoch:\t" << d << std::endl;          // これもcheck_durable未実装なので使えません
 }

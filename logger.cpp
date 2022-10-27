@@ -47,7 +47,7 @@ void Logger::add_tx_executor(TxExecutorLog &trans) {
 void Logger::logging(bool quit) {
     if (queue_.empty()) {
         if (quit) {
-            // notifier_.make_durable(nid_buffer_, quit);
+            notifier_.make_durable(nid_buffer_, quit);
         }
         return;
     }
@@ -113,7 +113,7 @@ void Logger::send_nid_to_notifier(std::uint64_t min_epoch, bool quit) {
     auto new_dl = min_epoch - 1;    // new durable_epoch
     auto old_dl = __atomic_load_n(&(ThLocalDurableEpoch[thid_].obj_), __ATOMIC_ACQUIRE);
     if (quit || old_dl < new_dl) {
-        // notifier_.make_durable(nid_buffer_, quit);
+        notifier_.make_durable(nid_buffer_, quit);
         asm volatile("":: : "memory");  // fence
         __atomic_store_n(&(ThLocalDurableEpoch[thid_].obj_), new_dl, __ATOMIC_RELEASE);
         asm volatile("":: : "memory");  // fence
@@ -140,8 +140,10 @@ void Logger::worker() {
     logfile_.open(logpath_);
 
     for (;;) {
+        std::uint64_t t = rdtscp();
         wait_deq();
         if (queue_.quit()) break;
+        wait_latency_ += rdtscp() - t;
         logging(false);
     }
     logging(true);  // Q:Logger::loggingにfalse投げたりtrue投げたり何してんねんまじで
@@ -149,7 +151,7 @@ void Logger::worker() {
     // Logger終わったンゴ連絡
     notifier_stats_.logger_end(this);
     logger_end();
-    // show_result();   // 使わないかも
+    show_result();
 }
 
 void Logger::worker_end(int thid) {
@@ -168,11 +170,14 @@ void Logger::logger_end() {
     cv_finish_.notify_all();
 }
 
-// やっぱ使わんかも
-// void Logger::show_result() {
-//     double cps = CLOCKS_PER_US * 1e6;
-//     static std::mutex mtx;
-//     std::lock_guard<std::mutex> lock(mtx);
-//     std::cout << "Logger#" << thid_
-//               << " byte_count"
-// }
+void Logger::show_result() {
+    double cps = CLOCKS_PER_US*1e6;
+    static std::mutex mtx;
+    std::lock_guard<std::mutex> lock(mtx);
+    cout << "Logger#"<<thid_
+         <<" byte_count[B]=" << byte_count_
+         <<" write_latency[s]=" << write_latency_/cps
+         <<" throughput[B/s]=" << byte_count_/(write_latency_/cps)
+         <<" wait_latency[s]=" << wait_latency_/cps
+         << endl;
+}

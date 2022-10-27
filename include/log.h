@@ -9,7 +9,7 @@
 class LogHeader {
     public:
         int chkSum_ = 0;
-        unsigned int logRecNum_ = 0;    // Q:?
+        unsigned int logRecNum_ = 0;    // log_record_sizeをheaderに情報として残しておく, 恐らくrecoveryでheader読んで回数指定してみたいな感じ
         const std::size_t len_val_ = VAL_SIZE;
 
         void init() {

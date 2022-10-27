@@ -28,16 +28,16 @@ class Result {
 class ResultLog {
     public:
         Result result_;
-        uint64_t local_bkpr_latency_ = 0;           // これなに？
-        uint64_t local_txn_latency_ = 0;            // これなに？
-        uint64_t local_wait_depoch_latency_ = 0;    // これなに？
-        uint64_t local_publish_latency_ = 0;        // これなに？
+        uint64_t local_bkpr_latency_ = 0;
+        uint64_t local_txn_latency_ = 0;
+        uint64_t local_wait_depoch_latency_ = 0;
+        uint64_t local_publish_latency_ = 0;
         uint64_t local_publish_counts_ = 0;
 
-        uint64_t total_bkpr_latency_ = 0;           // これなに？
-        uint64_t total_txn_latency_ = 0;            // これなに？
-        uint64_t total_wait_depoch_latency_ = 0;    // これなに？
-        uint64_t total_publish_latency_ = 0;        // これなに？
+        uint64_t total_bkpr_latency_ = 0;
+        uint64_t total_txn_latency_ = 0;
+        uint64_t total_wait_depoch_latency_ = 0;
+        uint64_t total_publish_latency_ = 0;
         uint64_t total_publish_counts_ = 0;
 
         void displayAllResult(size_t clock_per_us, size_t extime, size_t thread_num);

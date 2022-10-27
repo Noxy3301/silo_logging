@@ -1,7 +1,7 @@
 #pragma once
 
 //common
-#define CLOCKS_PER_US 2800  // CPU_MHz. Use this info for measuring time. (i5-10440F, -100MHz?)
+#define CLOCKS_PER_US 4000  // CPU_MHz. Use this info for measuring time. (i5-10440F, about 4GHz?)
 #define EPOCH_TIME 40       // Epoch interval[ms].
 #define EXTIME 3            // Execution time[sec].
 #define MAX_OPE 10          // Total number of operations per single transaction.

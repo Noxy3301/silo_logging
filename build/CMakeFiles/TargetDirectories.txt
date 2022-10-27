@@ -1,3 +1,0 @@
-/home/noxy/cpp/silo_logging/build/CMakeFiles/edit_cache.dir
-/home/noxy/cpp/silo_logging/build/CMakeFiles/rebuild_cache.dir
-/home/noxy/cpp/silo_logging/build/CMakeFiles/silo.exe.dir
