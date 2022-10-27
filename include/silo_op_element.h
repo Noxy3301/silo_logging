@@ -48,9 +48,9 @@ class WriteElement : public OpElement<T> {
         using OpElement<T>::OpElement;
 
         WriteElement(uint64_t key, T *rcdptr, std::string_view val) : OpElement<T>::OpElement(key, rcdptr) {
-            static_assert(std::string_view("").size() == 0, "Expected behavior was broken.");   // Q:?
+            static_assert(std::string_view("").size() == 0, "Expected behavior was broken.");   // A:処理系によっては空文字列が0にならないのがあるかもしれないからそれをはじくためらしい
             if (val.size() != 0) {
-                val_ptr_ = std::make_unique<char[]>(val.size());    // Q:?
+                val_ptr_ = std::make_unique<char[]>(val.size());    // A:writeで書き込むvalueのデータを格納する領域を確保しているらしい
                 memcpy(val_ptr_.get(), val.data(), val.size());
                 val_length_ = val.size();
             } else {
@@ -71,7 +71,6 @@ class WriteElement : public OpElement<T> {
         }
 
     private:
-        // Q:?
         std::unique_ptr<char[]> val_ptr_; // NOLINT
         std::size_t val_length_{};
 };

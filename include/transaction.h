@@ -55,7 +55,7 @@ class TxExecutor {
         ReadElement<Tuple> *searchReadSet(std::uint64_t key);
         WriteElement<Tuple> *searchWriteSet(std::uint64_t key);
         void unlockWriteSet();
-        void unlockWriteSet(std::vector<WriteElement<Tuple>>::iterator end);    // Q:?
+        void unlockWriteSet(std::vector<WriteElement<Tuple>>::iterator end);    // A:Lock中にabortした際に使う、start->itr-1までをunlock
         bool validationPhase();
         virtual void wal(std::uint64_t ctid);    // write ahead logging
         void write(uint64_t key, std::string_view val = "");    // そもそもstring_viewはSGX対応してなさそうだしつかない方が良いかも、kv形式にしたいかも

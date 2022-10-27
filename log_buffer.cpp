@@ -30,7 +30,8 @@ void LogBufferPool::push(std::uint64_t tid, NotificationId &nid, std::vector<Wri
 };
 
 void LogBuffer::push(std::uint64_t tid, NotificationId &nid, std::vector<WriteElement<Tuple>> &write_set, char *val) {
-    // assert(write_set.size() > 0);   // Q:read_only txもあるからwrite_set.size() == 0もあり得てassertで落ちるけど、NDEBUGがONになっている、じゃあAssert置く意味なくない？
+    // Q:read_only txもあるからwrite_set.size() == 0もあり得てassertで落ちるけど、NDEBUGがONになっている、じゃあAssert置く意味なくない？
+    // assert(write_set.size() > 0);   // A:本当に置く意味がないのでこれでOK Q:というかやっぱりここが釈然としない
     // buffering
     for (auto &itr : write_set) {
         log_set_[log_set_size_++] = LogRecord(tid, itr.key_, val);
@@ -40,10 +41,10 @@ void LogBuffer::push(std::uint64_t tid, NotificationId &nid, std::vector<WriteEl
     TIDword tidw;
     tidw.obj_ = tid;
     std::uint64_t epoch = tidw.epoch;
-    // Q:なにしてるこれ？
+    // A:1つのLogbufferに違うEpochのログが入らないかチェックしているらしい
     if (epoch < min_epoch_) min_epoch_ = epoch;
     if (epoch > max_epoch_) max_epoch_ = epoch;
-    // assert(min_epoch_ == max_epoch_); // Q:NDEBUGがONになっている、じゃあAssert置く意味なくない？
+    assert(min_epoch_ == max_epoch_); // A:NDEBUGがONになっているのでassert検証はoffだよ
 };
 
 

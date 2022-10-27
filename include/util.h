@@ -87,7 +87,7 @@ inline static void makeProcedure(std::vector<Procedure> &pro, Xoroshiro128Plus &
             }
         }
     }
-    // Q:?
+    // A:TicTocとかCicadaとかで使う用、siloでは使ていない
     (*pro.begin()).ronly_ = ronly_flag;
     (*pro.begin()).wonly_ = wonly_flag;
 }

@@ -27,7 +27,7 @@ class NotificationId {
         }
 };
 
-class PepochFile {  // Q:なにこれ？Epochファイルに書き出してなんか意味あるの？
+class PepochFile {  // A:siloRでpepochを書き出しているのでそれに則っているらしい
     private:
         std::string file_name_ = "log0/pepoch";
         std::uint64_t *addr_;

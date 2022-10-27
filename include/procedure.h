@@ -27,6 +27,10 @@ class Procedure {
             // Q:解説希望, operatorのオーバーロード演算子もよくわからん
             // 同一キーなら先にwriteを実行したい, read->writeよりwrite->read
             // 同一キーで自分がreadでここまで来たら、下記の式で絶対にfalseになり、自分(read)が昇順で後ろ回しになるのでOKらしい
+
+            // A:Procedureをソートするときに使っているらしい(故にsilo単体の実装では使わない)
+            // ただ、write->readの順が良いのかは結局不明
+
             return this->key_ < right.key_;
         }
 };
