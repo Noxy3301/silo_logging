@@ -1,6 +1,6 @@
 # silo_logging
 
-# Abort
+# About
 silo_loggingの最小構成だけを抜き出して写経させていただいています。<br>
 故にnuma, notificationID関連(?), その他DataDog用の最適化に使用しているものは実装していません。(恐らく研究に使用しないため)
 
